@@ -24,17 +24,6 @@
         <input name="amountInput" type="number" id="amount" value=""><span> USD</span>
         <p id="priceLabelError" style="visibility: hidden; color:red; text-align: center;">Please enter a price</p>
         </div>
-        <div class="form-group">
-          <label for="exampleInputFile">File input</label>
-          <input type="file" id="exampleInputFile">
-          <p class="help-block">Example block-level help text here.</p>
-        </div>
-        <div class="checkbox">
-          <label>
-            <input type="checkbox"> Check me out
-          </label>
-        </div>
-        <button type="submit" class="btn btn-default">Submit</button>
     </form>
     <div style="text-align: center; margin-top: 0.625rem;" id="paypal-button-container"></div>
   </div>
@@ -43,19 +32,12 @@
     data-sdk-integration-source="button-factory"></script>
   <script>
       function initPayPalButton() {
-        var description = document.querySelector('#description');
-        var amount = document.querySelector('#amount');
-        var descriptionError = document.querySelector('#descriptionError');
-        var priceError = document.querySelector('#priceLabelError');
-        var invoiceid = document.querySelector('#invoiceid');
-        var invoiceidError = document.querySelector('#invoiceidError');
-        var invoiceidDiv = document.querySelector('#invoiceidDiv');
+        var description = document.getElementById('#description');
+        var amount = document.getElementById('#amount');
+        var descriptionError = document.getElementById('#descriptionError');
+        var priceError = document.getElementById('#priceLabelError');
 
       var elArr = [description, amount];
-
-      if (invoiceidDiv.firstChild.innerHTML.length > 1) {
-        invoiceidDiv.style.display = "block";
-      }
 
       var purchase_units = [];
       purchase_units[0] = {};
@@ -76,10 +58,6 @@
 
         onInit: function (data, actions) {
           actions.disable();
-
-          if (invoiceidDiv.style.display === "block") {
-            elArr.push(invoiceid);
-          }
 
           elArr.forEach(function (item) {
             item.addEventListener('keyup', function (event) {
@@ -106,18 +84,9 @@
             priceError.style.visibility = "hidden";
           }
 
-          if (invoiceid.value.length < 1 && invoiceidDiv.style.display === "block") {
-            invoiceidError.style.visibility = "visible";
-          } else {
-            invoiceidError.style.visibility = "hidden";
-          }
-
           purchase_units[0].description = description.value;
           purchase_units[0].amount.value = amount.value;
 
-          if (invoiceid.value !== '') {
-            purchase_units[0].invoice_id = invoiceid.value;
-          }
         },
 
         createOrder: function (data, actions) {
