@@ -12,75 +12,69 @@
 
 <body>
 
+
   <div id="smart-button-container">
-    <div class="form-group">
-      <label for="exampleInputEmail1">Email address</label>
-      <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
-    </div>
-    <div class="form-group">
-      <label for="exampleInputPassword1">Password</label>
-      <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
-    </div>
-    <div class="form-group">
-      <label for="exampleInputFile">File input</label>
-      <input type="file" id="exampleInputFile">
-      <p class="help-block">Example block-level help text here.</p>
-    </div>
-    <div class="checkbox">
-      <label>
-        <input type="checkbox"> Check me out
-      </label>
-    </div>
-    <button type="submit" class="btn btn-default">Submit</button>
-    </div>
-    
-    <div id="smart-button-container">
-      <div style="text-align: center"><label for="description">Payment for </label><input type="text"
-          name="descriptionInput" id="description" maxlength="127" value=""></div>
-      <p id="descriptionError" style="visibility: hidden; color:red; text-align: center;">Please enter a description</p>
-    <div style="text-align: center"><label for="amount">Amount </label><input name="amountInput" type="number" id="amount"
-        value=""><span> USD</span></div>
-    <p id="priceLabelError" style="visibility: hidden; color:red; text-align: center;">Please enter a price</p>
-    <div id="invoiceidDiv" style="text-align: center; display: none;"><label for="invoiceid"> </label><input
-        name="invoiceid" maxlength="127" type="text" id="invoiceid" value=""></div>
-    <p id="invoiceidError" style="visibility: hidden; color:red; text-align: center;">Please enter an Invoice ID</p>
+    <form>
+      <div class="form-group">
+        <label for="description">Payment for</label>
+        <input type="text" name="descriptionInput" id="description" maxlength="127" value="">
+        <p id="descriptionError" style="visibility: hidden; color:red; text-align: center;">Please enter a description
+        </p>
+        </div>
+        <div class="form-group">
+        <label for="amount">Amount</label>
+        <input name="amountInput" type="number" id="amount" value=""><span> USD</span>
+        <p id="priceLabelError" style="visibility: hidden; color:red; text-align: center;">Please enter a price</p>
+        </div>
+        <div class="form-group">
+          <label for="exampleInputFile">File input</label>
+          <input type="file" id="exampleInputFile">
+          <p class="help-block">Example block-level help text here.</p>
+        </div>
+        <div class="checkbox">
+          <label>
+            <input type="checkbox"> Check me out
+          </label>
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>
+    </form>
     <div style="text-align: center; margin-top: 0.625rem;" id="paypal-button-container"></div>
   </div>
   <script
     src="https://www.paypal.com/sdk/js?client-id=AQ2-vtWSv8D1z4Sx7voN1yOnqnoGLIgJM_-MxzQas1nJGRC55xU0I7FgFiqj-I9ZuoDie0K1US8BexzL&enable-funding=venmo&currency=USD"
     data-sdk-integration-source="button-factory"></script>
   <script>
-        function initPayPalButton() {
-          var description = document.querySelector('#smart-button-container #description');
-          var amount = document.querySelector('#smart-button-container #amount');
-          var descriptionError = document.querySelector('#smart-button-container #descriptionError');
-          var priceError = document.querySelector('#smart-button-container #priceLabelError');
-          var invoiceid = document.querySelector('#smart-button-container #invoiceid');
-          var invoiceidError = document.querySelector('#smart-button-container #invoiceidError');
-          var invoiceidDiv = document.querySelector('#smart-button-container #invoiceidDiv');
+      function initPayPalButton() {
+        var description = document.querySelector('#smart-button-container #description');
+        var amount = document.querySelector('#smart-button-container #amount');
+        var descriptionError = document.querySelector('#smart-button-container #descriptionError');
+        var priceError = document.querySelector('#smart-button-container #priceLabelError');
+        var invoiceid = document.querySelector('#smart-button-container #invoiceid');
+        var invoiceidError = document.querySelector('#smart-button-container #invoiceidError');
+        var invoiceidDiv = document.querySelector('#smart-button-container #invoiceidDiv');
 
-        var elArr = [description, amount];
+      var elArr = [description, amount];
 
-        if (invoiceidDiv.firstChild.innerHTML.length > 1) {
-          invoiceidDiv.style.display = "block";
-        }
+      if (invoiceidDiv.firstChild.innerHTML.length > 1) {
+        invoiceidDiv.style.display = "block";
+      }
 
-        var purchase_units = [];
-        purchase_units[0] = {};
-        purchase_units[0].amount = {};
+      var purchase_units = [];
+      purchase_units[0] = {};
+      purchase_units[0].amount = {};
 
-        function validate(event) {
-          return event.value.length > 0;
-        }
+      function validate(event) {
+        return event.value.length > 0;
+      }
 
-        paypal.Buttons({
-          style: {
-            color: 'gold',
-            shape: 'rect',
-            label: 'pay',
-            layout: 'vertical',
+      paypal.Buttons({
+        style: {
+          color: 'gold',
+          shape: 'rect',
+          label: 'pay',
+          layout: 'vertical',
 
-          },
+        },
 
         onInit: function (data, actions) {
           actions.disable();
@@ -154,8 +148,8 @@
           console.log(err);
         }
       }).render('#paypal-button-container');
-          }
-          initPayPalButton();
+      }
+      initPayPalButton();
   </script>
 
 </body>
